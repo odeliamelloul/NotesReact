@@ -1,12 +1,9 @@
 
-
 import React from "react"
 import "../App.css"
 import Note from "./Note"
 class frontPage extends React.Component
 {
-  
-    
     constructor(props) {
       
         super(props)
@@ -50,22 +47,12 @@ class frontPage extends React.Component
         this.setState({ id, allNotes: notesArr })
     }
 
-    onload = ()=> {
-       
-    }
-
     deleteNotes(id)
     {
         let arr=JSON.parse(localStorage.getItem("Notes")) 
-        
         arr= arr.filter(arr=> arr.id !== id);
-        
-
         localStorage.setItem("Notes",JSON.stringify(arr))
-
         this.setState({ allNotes: JSON.parse(localStorage.getItem("Notes")) })
-   
-   
     }
     deleteAllNotes()
     {
@@ -73,36 +60,23 @@ class frontPage extends React.Component
         this.setState({ id: 0, allNotes: [] })
     }
 
-    handleOnChange(event) {
-        this.setState({
-          textareaValue: event.target.value
-        })
-      }
-
-      dateInput(event) {
-        this.setState({
-          date: event.target.value
-        })
-      }
-      TimeInput(event) {
-        this.setState({
-          time: event.target.value
-        })
-      }
+    handleOnChange(event) { this.setState({   textareaValue: event.target.value })}
+   
+    dateInput(event) {  this.setState({  date: event.target.value  }) }
+      
+    TimeInput(event) {this.setState({ time: event.target.value })}
 
 render(){
     return(
-        <div>
-        <h1>MY NOTES BOARD</h1>
-          <textarea placeholder="Enter Your Notes" value={this.state.textareaValue} onChange={(event) => this.handleOnChange(event)}></textarea>
-          <br/>
-          <input type="date" onChange={(event) => this.dateInput(event)} />
-          <input type="Time" onChange={(event) => this.TimeInput(event)} />
-          <br/>
-          <button  onClick={()=>this.addNotes()} >Add</button>
-          <br/>
-          <button onClick={()=>this.deleteAllNotes()}>Delete All</button>
-          <br/>
+        <div className="FrontPage">
+            <div className="my_form">
+              <h1>MY NOTES BOARD</h1>
+              <textarea  placeholder="Enter Your Notes" value={this.state.textareaValue} onChange={(event) => this.handleOnChange(event)}></textarea>
+              <input type="date" onChange={(event) => this.dateInput(event)} />
+              <input type="Time" onChange={(event) => this.TimeInput(event)} />
+              <button  onClick={()=>this.addNotes()} >Add Note</button>
+              <button onClick={()=>this.deleteAllNotes()}>Delete All</button>
+              </div>
           <div>
           {
           this.state.allNotes.map((singleNote) =>
@@ -114,9 +88,6 @@ render(){
           </div>
         </div>
     )
-
-}
-
-}
+}}
 
 export default frontPage

@@ -6,6 +6,16 @@
   background-repeat: repeat;
  
 }
+.FrontPage{
+  text-align: center;
+}
+.my_form{
+  width: 300px;
+  margin: 0 auto;
+}
+.my_form input,.my_form button { 
+  width: 160px;
+}
 h1{
   margin: 0;
   color:rgb(46, 29, 7);
@@ -27,15 +37,18 @@ textarea{
   
 }
 .allNotes{
- float: left;
-  margin-right: 100px;
+  
+  float: left;
+  margin-right: 30px;
   text-align: center;
  
 }
 .delete{
-  float: left;
-  margin-top: 30px;
-  margin-left: 30px;
-  color: rgb(251, 253, 255);
-  background-color: red;
+  position: relative;
+    z-index: 1;
+    float: left;
+    top: 30px;
+    left: 23px;
+    color: rgb(251, 253, 255);
+    background-color: red;
 }

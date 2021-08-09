@@ -28,14 +28,6 @@ class frontPage extends React.Component
 
         if(this.state.time!="" && this.state.date!="")
                 notesArr.push({ id,Data,Date:this.state.date,Time:this.state.time})
-
-        else if(this.state.date!="")
-        
-         notesArr.push({ id,Data,Date:this.state.date,Time:date.toLocaleTimeString()})
-        
-        else if(this.state.times!="")
-        
-         notesArr.push({ id,Data,Date:date.toLocaleDateString(),Time:this.state.time})
         
         else
            notesArr.push({ id,Data,Date:date.toLocaleDateString(),Time:date.toLocaleTimeString()})

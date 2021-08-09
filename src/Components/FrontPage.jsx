@@ -1,14 +1,17 @@
 
+
 import React from "react"
 import "../App.css"
 import Note from "./Note"
 class frontPage extends React.Component
 {
+  
     
     constructor(props) {
+      
         super(props)
         this.state = {
-          id:0,
+          id: (localStorage.getItem("Notes")) ? JSON.parse(localStorage.getItem("Notes"))[JSON.parse(localStorage.getItem("Notes")).length-1].id : 0,
           date:"",
           time:"",
           textareaValue: '',
@@ -18,36 +21,47 @@ class frontPage extends React.Component
 
      addNotes(){
         let notesArr = [...this.state.allNotes]
-        let id = this.state.id+1
+        let id = this.state.id
+        id++
         let Data=this.state.textareaValue
-
         let date=new Date()
-
         //check if user enter a date or time with input  
+        
+        if(this.state.time==="" && this.state.date==="")
+          {  notesArr.push({ id, Data, Date:date.toLocaleDateString(), Time:date.toLocaleTimeString()})}
 
+         else{
 
-        if(this.state.time!="" && this.state.date!="")
-                notesArr.push({ id,Data,Date:this.state.date,Time:this.state.time})
-        
-        else
-           notesArr.push({ id,Data,Date:date.toLocaleDateString(),Time:date.toLocaleTimeString()})
-        
-        
-        this.setState({ id, allNotes: notesArr })
-        
+            if(this.state.time!=="" && this.state.date!=="")
+                  {  notesArr.push({ id,Data,Date:this.state.date,Time:this.state.time})}
 
+            else if(this.state.date!==""  && this.state.time==="")
+
+            { notesArr.push({ id,Data,Date:this.state.date,Time:date.toLocaleTimeString()})}
+
+            else if(this.state.times!==""&& this.state.date==="")
+
+            {notesArr.push({ id,Data,Date:date.toLocaleDateString(),Time:this.state.time})}
+         }
+        
+       
         localStorage.setItem("Notes", JSON.stringify(notesArr))
+
+        this.setState({ id, allNotes: notesArr })
     }
 
+    onload = ()=> {
+       
+    }
 
     deleteNotes(id)
     {
         let arr=JSON.parse(localStorage.getItem("Notes")) 
         
         arr= arr.filter(arr=> arr.id !== id);
-    
-        localStorage.setItem("Notes",JSON.stringify(arr))
+        
 
+        localStorage.setItem("Notes",JSON.stringify(arr))
 
         this.setState({ allNotes: JSON.parse(localStorage.getItem("Notes")) })
    
